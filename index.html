@@ -66,75 +66,59 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 顶部标题 -->
-        <header class="mb-8 text-center">
-            <h1 class="text-4xl font-bold text-primary mb-2">博士生工位打卡与时间管理系统</h1>
-            <p class="text-gray-600" id="current-date-time">2023年7月21日 星期五 08:00</p>
+<body class="bg-gray-100 font-sans min-h-screen pb-24 md:pb-0">
+    <div class="container mx-auto px-4 py-6 max-w-6xl">
+        <header class="mb-6 text-center">
+            <h1 class="text-2xl md:text-4xl font-bold text-primary mb-2">博士生活与科研看板</h1>
+            <p class="text-gray-600 text-sm md:text-base" id="current-date-time">正在加载时间...</p>
         </header>
 
         <!-- 主内容区 -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <!-- 左侧导航 -->
-            <nav class="md:col-span-1">
-                <div class="bg-white rounded-lg shadow-lg p-4 sticky top-4">
-                    <ul class="space-y-2">
-                        <li>
-                            <button id="nav-checkin" class="w-full text-left px-4 py-3 rounded-md bg-primary text-white flex items-center justify-between">
-                                <span class="font-medium">打卡记录</span>
-                                <i class="fa fa-clock-o"></i>
+           <nav class="fixed bottom-0 left-0 w-full z-50 md:relative md:col-span-1 md:w-auto md:z-0">
+                <div class="bg-white md:rounded-lg shadow-[0_-5px_15px_rgba(0,0,0,0.1)] md:shadow-lg p-2 md:p-4 md:sticky md:top-4">
+                    <ul class="flex justify-between md:space-y-2 md:block px-1">
+                        <li class="flex-1 md:w-full">
+                            <button id="nav-checkin" class="w-full flex flex-col md:flex-row items-center justify-center md:justify-between p-2 md:px-4 md:py-3 rounded-md bg-primary text-white transition-all">
+                                <i class="fa fa-clock-o text-xl md:text-base mb-1 md:mb-0"></i>
+                                <span class="text-[11px] md:text-base font-medium">打卡</span>
                             </button>
                         </li>
-                        <li>
-                            <button id="nav-phone" class="w-full text-left px-4 py-3 rounded-md hover:bg-gray-100 flex items-center justify-between">
-                                <span class="font-medium">手机克制</span>
-                                <i class="fa fa-mobile"></i>
+                        <li class="flex-1 md:w-full">
+                            <button id="nav-phone" class="w-full flex flex-col md:flex-row items-center justify-center md:justify-between p-2 md:px-4 md:py-3 rounded-md text-gray-500 hover:bg-gray-100 transition-all">
+                                <i class="fa fa-mobile text-xl md:text-base mb-1 md:mb-0"></i>
+                                <span class="text-[11px] md:text-base font-medium">克制</span>
                             </button>
                         </li>
-                        <li>
-                            <button id="nav-tasks" class="w-full text-left px-4 py-3 rounded-md hover:bg-gray-100 flex items-center justify-between">
-                                <span class="font-medium">任务管理</span>
-                                <i class="fa fa-tasks"></i>
+                        <li class="flex-1 md:w-full">
+                            <button id="nav-tasks" class="w-full flex flex-col md:flex-row items-center justify-center md:justify-between p-2 md:px-4 md:py-3 rounded-md text-gray-500 hover:bg-gray-100 transition-all">
+                                <i class="fa fa-tasks text-xl md:text-base mb-1 md:mb-0"></i>
+                                <span class="text-[11px] md:text-base font-medium">任务</span>
                             </button>
                         </li>
-                        <li>
-                            <button id="nav-leave" class="w-full text-left px-4 py-3 rounded-md hover:bg-gray-100 flex items-center justify-between">
-                                <span class="font-medium">请假记录</span>
-                                <i class="fa fa-calendar-minus-o"></i>
+                        <li class="flex-1 md:w-full">
+                            <button id="nav-leave" class="w-full flex flex-col md:flex-row items-center justify-center md:justify-between p-2 md:px-4 md:py-3 rounded-md text-gray-500 hover:bg-gray-100 transition-all">
+                                <i class="fa fa-calendar-minus-o text-xl md:text-base mb-1 md:mb-0"></i>
+                                <span class="text-[11px] md:text-base font-medium">请假</span>
                             </button>
                         </li>
-                        <li>
-                            <button id="nav-stats" class="w-full text-left px-4 py-3 rounded-md hover:bg-gray-100 flex items-center justify-between">
-                                <span class="font-medium">统计分析</span>
-                                <i class="fa fa-bar-chart"></i>
+                        <li class="flex-1 md:w-full">
+                            <button id="nav-stats" class="w-full flex flex-col md:flex-row items-center justify-center md:justify-between p-2 md:px-4 md:py-3 rounded-md text-gray-500 hover:bg-gray-100 transition-all">
+                                <i class="fa fa-bar-chart text-xl md:text-base mb-1 md:mb-0"></i>
+                                <span class="text-[11px] md:text-base font-medium">统计</span>
                             </button>
                         </li>
                     </ul>
                     
-                    <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                    <div class="hidden md:block mt-8 p-4 bg-blue-50 rounded-lg">
                         <h3 class="font-medium text-primary mb-2">今日状态</h3>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span>上午打卡:</span>
-                                <span id="today-morning-status" class="font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>下午打卡:</span>
-                                <span id="today-afternoon-status" class="font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>晚上打卡:</span>
-                                <span id="today-evening-status" class="font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>手机克制:</span>
-                                <span id="today-phone-count" class="font-medium">0 次</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>进行中任务:</span>
-                                <span id="today-active-task" class="font-medium">-</span>
-                            </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between"><span>上午打卡:</span><span id="today-morning-status" class="font-medium">-</span></div>
+                            <div class="flex justify-between"><span>下午打卡:</span><span id="today-afternoon-status" class="font-medium">-</span></div>
+                            <div class="flex justify-between"><span>晚上打卡:</span><span id="today-evening-status" class="font-medium">-</span></div>
+                            <div class="flex justify-between"><span>手机克制:</span><span id="today-phone-count" class="font-medium">0 次</span></div>
+                            <div class="flex justify-between"><span>进行中任务:</span><span id="today-active-task" class="font-medium truncate max-w-[100px] text-right">-</span></div>
                         </div>
                     </div>
                 </div>
